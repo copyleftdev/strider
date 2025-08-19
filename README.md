@@ -386,9 +386,63 @@ The included vulnerable mock server (`cmd/mockserver/`) provides:
 - Performance benchmarking target
 - Integration test validation
 
+## Expert Report Generator
+
+STRIDER includes a comprehensive report generator that creates professional security assessments with expert-level analysis and POC sections.
+
+### Report Generation
+
+```bash
+# Generate all report formats
+./report-generator --format all
+
+# Generate specific format
+./report-generator --format html --session [SESSION_ID]
+
+# Custom output directory
+./report-generator --output ./custom-reports --format all
+```
+
+### Report Formats
+
+- **HTML**: Interactive reports with tabbed interface, executive summary, and POC sections
+- **JSON**: Structured data with comprehensive metadata and security metrics
+- **SARIF**: Industry-standard format compatible with GitHub Security tab
+- **Markdown**: Documentation-ready format for technical teams
+
+### Expert Features
+
+- **Executive Overview**: Risk assessment, compliance status, immediate actions
+- **Security Metrics**: Vulnerability density, attack surface analysis, risk scoring
+- **POC Sections**: Detailed proof-of-concept exploits for critical/high findings
+- **Technical Analysis**: Rule-by-rule breakdown with instance counts
+- **AI Integration**: Ready for AI-powered expert analysis and remediation guidance
+
+### Professional HTML Reports
+
+The HTML reports feature:
+- Modern responsive design with tabbed navigation
+- Executive summary with security metrics dashboard
+- Interactive findings browser with severity-based filtering
+- Automated POC generation for high-risk vulnerabilities
+- Comprehensive scan metadata and coverage analysis
+
+## Network Traffic Analysis
+
+STRIDER captures comprehensive network traffic during scans:
+
+- **HTTP Requests**: URLs, methods, headers, POST data, timestamps
+- **HTTP Responses**: Status codes, headers, body samples, response times
+- **WebSocket Communications**: Real-time bidirectional data capture
+- **Security Analysis**: Headers analysis, parameter inspection, traffic patterns
+
+Network data is stored in SQLite database and integrated into security findings for complete visibility into application behavior.
+
 ## Roadmap
 
 - [x] **Performance Benchmarking & Metrics** - Comprehensive performance testing suite
+- [x] **Expert Report Generator** - Professional security assessment reports with POC sections
+- [x] **Network Traffic Capture** - Complete HTTP/WebSocket traffic analysis
 - [ ] **CI/CD Pipeline Configuration** - Automated builds and testing
 - [ ] **Docker Containerization** - Container deployment support
 - [ ] **Enhanced Documentation** - Usage examples and tutorials
