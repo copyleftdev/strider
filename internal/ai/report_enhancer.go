@@ -2,9 +2,7 @@ package ai
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"strings"
 
 	"github.com/zuub-code/strider/pkg/types"
 )
@@ -222,7 +220,7 @@ func (re *ReportEnhancer) GenerateExpertAnalysis(ctx context.Context, findings [
 
 // generateExecutiveSummary creates executive-level summary
 func (re *ReportEnhancer) generateExecutiveSummary(ctx context.Context, findings []types.Finding, scanContext *types.AnalysisContext) (*ExecutiveSummary, error) {
-	prompt, err := re.prompts.RenderTemplate("executive_summary", map[string]interface{}{
+	_, err := re.prompts.RenderTemplate("executive_summary", map[string]interface{}{
 		"findings":     findings,
 		"scanContext": scanContext,
 		"totalCount":  len(findings),
@@ -231,7 +229,7 @@ func (re *ReportEnhancer) generateExecutiveSummary(ctx context.Context, findings
 		return nil, err
 	}
 	
-	response, err := re.aiService.AnalyzeFindings(ctx, findings, scanContext)
+	_, err = re.aiService.AnalyzeFindings(ctx, findings, scanContext)
 	if err != nil {
 		return nil, err
 	}
@@ -263,7 +261,7 @@ func (re *ReportEnhancer) generateActionablePOCs(ctx context.Context, findings [
 
 // generateSinglePOC creates a detailed POC for a specific finding
 func (re *ReportEnhancer) generateSinglePOC(ctx context.Context, finding types.Finding, scanContext *types.AnalysisContext) (*ActionablePOC, error) {
-	prompt, err := re.prompts.RenderTemplate("poc_generation", map[string]interface{}{
+	_, err := re.prompts.RenderTemplate("poc_generation", map[string]interface{}{
 		"finding":     finding,
 		"scanContext": scanContext,
 	})
@@ -271,14 +269,8 @@ func (re *ReportEnhancer) generateSinglePOC(ctx context.Context, finding types.F
 		return nil, err
 	}
 	
-	request := &AIRequest{
-		Model:       "llama3.1:8b",
-		Prompt:      prompt,
-		Temperature: 0.1,
-		MaxTokens:   2048,
-	}
-	
-	response, err := re.aiService.Generate(ctx, request)
+	// Generate POC using existing AI service methods
+	_, err = re.aiService.GenerateRemediation(ctx, finding, scanContext)
 	if err != nil {
 		return nil, err
 	}
@@ -287,7 +279,7 @@ func (re *ReportEnhancer) generateSinglePOC(ctx context.Context, finding types.F
 	poc := &ActionablePOC{
 		VulnerabilityID: finding.ID,
 		Title:           finding.Title,
-		Severity:        finding.Severity,
+		Severity:        string(finding.Severity),
 		// Parse other fields from AI response
 	}
 	
@@ -394,7 +386,7 @@ func filterBySeverity(findings []types.Finding, severities []string) []types.Fin
 	}
 	
 	for _, finding := range findings {
-		if severityMap[finding.Severity] {
+		if severityMap[string(finding.Severity)] {
 			filtered = append(filtered, finding)
 		}
 	}
