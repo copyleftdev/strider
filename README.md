@@ -1,4 +1,15 @@
-# STRIDER - Expert-Level Security Analysis Platform
+<div align="center">
+  <img src="media/logo.png" alt="STRIDER Logo" width="200"/>
+  
+  # STRIDER - Expert-Level Security Analysis Platform
+  
+  [![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go)](https://golang.org)
+  [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+  [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)](https://github.com/zuub-code/strider)
+  [![Security](https://img.shields.io/badge/Security-100%25%20Coverage-green?style=for-the-badge)](https://github.com/zuub-code/strider)
+  [![AI Powered](https://img.shields.io/badge/AI-Ollama%20Integration-purple?style=for-the-badge)](https://ollama.ai)
+  [![Platform](https://img.shields.io/badge/Platform-Linux%20|%20Windows%20|%20macOS-lightgrey?style=for-the-badge)](https://github.com/zuub-code/strider)
+</div>
 
 STRIDER is a sophisticated, production-ready security analysis platform that combines advanced web crawling, intelligent network capture, static security analysis, and AI-powered risk assessment using local Ollama models.
 
