@@ -1,0 +1,66 @@
+# STRIDER Configuration File
+# Security Analysis Platform Configuration
+
+# Target Configuration
+server:
+  host: "localhost"
+  port: 8080
+  read_timeout: "30s"
+  write_timeout: "30s"
+
+# Crawler Configuration
+crawler:
+  concurrency: 3
+  max_pages: 200
+  max_depth: 5
+  request_timeout: "30s"
+  user_agent: "STRIDER/1.0 Security Scanner"
+  enable_javascript: true
+  enable_images: false
+  allow_third_party: false
+  respect_robots: true
+  max_body_kb: 256
+
+# Analysis Configuration
+analysis:
+  enable_all_rules: true
+  disabled_rules: []
+  max_workers: 4
+  cache_size: 1000
+
+# AI Service Configuration
+ai:
+  enabled: true
+  base_url: "http://localhost:11434"
+  default_model: "llama3.1"
+  timeout: 60
+  max_tokens: 4096
+  temperature: 0.1
+
+# Storage Configuration
+storage:
+  type: "sqlite"
+  database_path: "./strider.db"
+  max_connections: 10
+  timeout: 30
+
+# Logging Configuration
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
+  enable_file_logging: false
+  log_file: "./strider.log"
+
+# Metrics Configuration
+metrics:
+  enabled: true
+  port: 9090
+  path: "/metrics"
+
+# Output Configuration
+output:
+  directory: "./reports"
+  formats: ["sarif", "json", "html"]
+  include_metadata: true
+  compress: false
